@@ -82,26 +82,27 @@
       const iPhoneCoverPrice = parseInt(document.getElementById("iPhoneCoverPrice").innerText);
 
       document.getElementById("incrementBtn").addEventListener('click', function () {
-         var totalPurchaseIPhone = document.getElementById("totalPurchaseIPhone").value;
-         totalPurchaseIPhone = parseInt(totalPurchaseIPhone) + 1;
-         document.getElementById("totalPurchaseIPhone").value = totalPurchaseIPhone;
-
-         totalPurchaseIPhone = totalPurchaseIPhone * iPhonePrice;
-         document.getElementById("iPhonePrice").innerText = totalPurchaseIPhone;
+         getTotalPurchaseWithAmount(iPhonePrice, "iPhonePrice", "totalPurchaseIPhone", 1);
       });
 
       document.getElementById("decrementBtn").addEventListener('click', function () {
+         getTotalPurchaseWithAmount(iPhonePrice, "iPhonePrice", "totalPurchaseIPhone", -1);
+      });
+
+      function getTotalPurchaseWithAmount(price, priceSpan, id, incrementDecrement) {
          var totalPurchaseIPhone = parseInt(document.getElementById("totalPurchaseIPhone").value);
-         if (totalPurchaseIPhone > 1) {
-            totalPurchaseIPhone = totalPurchaseIPhone - 1;
+         totalPurchaseIPhone = totalPurchaseIPhone + incrementDecrement;
+
+         if (totalPurchaseIPhone > 0) {
             document.getElementById("totalPurchaseIPhone").value = totalPurchaseIPhone;
+            totalPurchaseIPhone = totalPurchaseIPhone * price;
+            document.getElementById(priceSpan).innerText = totalPurchaseIPhone;
          } else {
+            document.getElementById(priceSpan).innerText = iPhonePrice;
             alert('Purchase value can\'t a negative or zero number.');
          }
 
-         totalPurchaseIPhone = totalPurchaseIPhone * iPhonePrice;
-         document.getElementById("iPhonePrice").innerText = totalPurchaseIPhone;
-      });
+      }
    </script>
 </body>
 
