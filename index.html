@@ -25,9 +25,9 @@
 
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button class="btn btn-default"><i id="decrementBtn" class="fas fa-minus"></i></button>
+                           <button id="decrementBtn" class="btn btn-default"><i class="fas fa-minus"></i></button>
                            <input id="totalPurchaseIPhone" type="text" class="form-control text-center" value="1">
-                           <button class="btn btn-default"><i id="incrementBtn" class="fas fa-plus"></i></button>
+                           <button id="incrementBtn" class="btn btn-default"><i class="fas fa-plus"></i></button>
                         </div>
                         <h5>$<span id="iPhonePrice">1219</span> </h5>
                         <img src="images/remove.png" alt="" class="remove-item">
@@ -43,9 +43,11 @@
                      </div>
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input id="" type="text" class="form-control text-center" value="1">
-                           <button class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           <button id="decrementBtnForCover" class="btn btn-default"><i
+                                 class="fas fa-minus"></i></button>
+                           <input id="totalPurchaseIPhoneCover" type="text" class="form-control text-center" value="1">
+                           <button id="incrementBtnForCover" class="btn btn-default"><i
+                                 class="fas fa-plus"></i></button>
 
                         </div>
                         <h5>$ <span id="iPhoneCoverPrice">59</span> </h5>
@@ -80,7 +82,7 @@
    <script>
       const iPhonePrice = parseInt(document.getElementById("iPhonePrice").innerText);
       const iPhoneCoverPrice = parseInt(document.getElementById("iPhoneCoverPrice").innerText);
-
+      // IPhone Event Listener
       document.getElementById("incrementBtn").addEventListener('click', function () {
          getTotalPurchaseWithAmount(iPhonePrice, "iPhonePrice", "totalPurchaseIPhone", 1);
       });
@@ -88,20 +90,27 @@
       document.getElementById("decrementBtn").addEventListener('click', function () {
          getTotalPurchaseWithAmount(iPhonePrice, "iPhonePrice", "totalPurchaseIPhone", -1);
       });
+      // IPhone Cover Event Listener
+      document.getElementById("incrementBtnForCover").addEventListener('click', function () {
+         getTotalPurchaseWithAmount(iPhoneCoverPrice, "iPhoneCoverPrice", "totalPurchaseIPhoneCover", 1);
+      });
+
+      document.getElementById("decrementBtnForCover").addEventListener('click', function () {
+         getTotalPurchaseWithAmount(iPhoneCoverPrice, "iPhoneCoverPrice", "totalPurchaseIPhoneCover", -1);
+      });
 
       function getTotalPurchaseWithAmount(price, priceSpan, id, incrementDecrement) {
-         var totalPurchaseIPhone = parseInt(document.getElementById("totalPurchaseIPhone").value);
+         var totalPurchaseIPhone = parseInt(document.getElementById(id).value);
          totalPurchaseIPhone = totalPurchaseIPhone + incrementDecrement;
 
          if (totalPurchaseIPhone > 0) {
-            document.getElementById("totalPurchaseIPhone").value = totalPurchaseIPhone;
+            document.getElementById(id).value = totalPurchaseIPhone;
             totalPurchaseIPhone = totalPurchaseIPhone * price;
             document.getElementById(priceSpan).innerText = totalPurchaseIPhone;
          } else {
-            document.getElementById(priceSpan).innerText = iPhonePrice;
+            document.getElementById(priceSpan).innerText = price;
             alert('Purchase value can\'t a negative or zero number.');
          }
-
       }
    </script>
 </body>
